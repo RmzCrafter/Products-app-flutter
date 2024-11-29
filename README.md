@@ -1,4 +1,4 @@
-# My Flutter App
+# Products App
 
 This is a simple mobile application built with Flutter. It integrates with Firebase for authentication and Firestore for storing data. The app provides functionalities such as user registration, login, and CRUD operations on a collection of items.
 
