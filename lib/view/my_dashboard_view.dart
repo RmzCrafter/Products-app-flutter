@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+import 'package:amazonmini/controller/my_firestore_helper.dart';
+import 'package:amazonmini/model/my_produit.dart';
+import 'package:amazonmini/view/my_background.dart';
+import 'package:amazonmini/view/detail_produit_page.dart';
+
+
+class MyDashBoard extends StatefulWidget {
+  String message;
+  MyDashBoard({super.key ,required this.message});
+
+  @override
+  State<MyDashBoard> createState() => _MyDashBoardState();
+}
+
+class _MyDashBoardState extends State<MyDashBoard> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      appBar: AppBar(
+        title: const Text("Mes Produits"),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+
+
+      ),
+      extendBodyBehindAppBar: true,
+
+      body: Stack(
+        children: [
+          const MyBackground(),
+          //lister en grille tous les produits de la base de donnée
+          GrilleList()
+        ],
+      )
+
+    );
+  }
+
+
+  Widget GrilleList(){
+    return StreamBuilder(
+        stream: MyFirestoreHelper().cloudProduits.snapshots(),
+        builder: (context,snap){
+          if(snap.connectionState == ConnectionState.waiting){
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+
+          }else {
+            if(!snap.hasData){
+              return const Center(
+                child: Text("Aucuns produits"),
+              );
+            }else {
+              List documents = snap.data!.docs;
+              return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 5,
+                  ),
+                  itemCount: documents.length,
+                  itemBuilder: (context,index){
+                    MyProduct produit = MyProduct(documents[index]);
+                    return GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>MyDetailProduct(product:produit)));
+                      },
+                      child: Image.network(produit.photos[0]),
+                    );
+
+
+
+                  }
+              );
+            }
+
+          }
+        }
+    );
+  }
+
+
+}
