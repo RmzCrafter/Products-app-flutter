@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:amazonmini/controller/constante.dart';
-import 'package:amazonmini/view/my_dashboard_view.dart';
 import 'package:amazonmini/controller/my_firestore_helper.dart';
+import 'package:amazonmini/view/home_page.dart';
 
 class MyRegisterView extends StatefulWidget {
   const MyRegisterView({super.key});
@@ -106,12 +106,10 @@ class _MyRegisterView extends State<MyRegisterView> {
             });
 
             print(me.mail);
-            Navigator.push(
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => MyDashBoard(
-                          message: mail.text,
-                        )));
+                    builder: (context) => const HomePage()));
           }).catchError((onError) {
             popUp();
           });

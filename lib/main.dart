@@ -4,15 +4,14 @@ import 'firebase_options.dart';
 import 'package:amazonmini/view/my_background.dart';
 import 'package:amazonmini/view/my_login_page.dart';
 import 'package:amazonmini/view/my_register_page.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:amazonmini/view/home_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Stripe.publishableKey =
-      "pk_test_51GQ8hTDVXOXIy9UxpbYscBnuiq9FTW63gCk5agdRp2JOjym1NvC03WVaEBdj6wwFkJzAeCit9ZA77sBTeQHaI9rI00fsdMSCog";
 
   runApp(const MyApp());
 }
@@ -24,12 +23,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'AmazonMini',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Products app'),
       debugShowCheckedModeBanner: false,
     );
   }

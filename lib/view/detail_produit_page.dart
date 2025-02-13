@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:amazonmini/model/my_produit.dart';
 import 'package:amazonmini/view/my_background.dart';
-import 'package:amazonmini/controller/paymentController.dart';
+import 'package:amazonmini/controller/my_firestore_helper.dart';
 
 class MyDetailProduct extends StatefulWidget {
   MyProduct product;
@@ -82,13 +82,14 @@ class _MyDetailProductState extends State<MyDetailProduct> {
                   ),
                 ),
                 onPressed: () {
-                  PaymentHelper().makePayement(
-                      context: context,
-                      amount: (widget.product.prix * 100).toString(),
-                      currency: "EUR");
+                  // Ajouter à l'historique des achats
+                  MyFirestoreHelper().addToHistory(widget.product.uid);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Produit ajouté avec succès !"))
+                  );
                 },
                 child: const Text(
-                  "Mettre dans le panier",
+                  "Acheter",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
