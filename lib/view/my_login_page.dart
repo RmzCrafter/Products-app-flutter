@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:amazonmini/view/my_dashboard_view.dart';
 import 'package:amazonmini/controller/my_firestore_helper.dart';
 import 'package:amazonmini/controller/constante.dart';
+import 'package:amazonmini/view/home_page.dart';
 
 class MyLoginView extends StatefulWidget {
   const MyLoginView({super.key});
@@ -99,7 +99,12 @@ class _MyLoginView extends State<MyLoginView> {
                 });
 
                 print(me.mail);
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>MyDashBoard(message: mail.text,)));
+                Navigator.pushReplacement(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage()
+                  )
+                );
               }).catchError((onError){
                 popUp();
               });
