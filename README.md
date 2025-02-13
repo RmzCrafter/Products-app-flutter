@@ -1,62 +1,35 @@
-# Products App
+# AmazonMini - Application Flutter E-commerce
 
-This is a simple mobile application built with Flutter. It integrates with Firebase for authentication and Firestore for storing data. The app provides functionalities such as user registration, login, and CRUD operations on a collection of items.
+## Description
 
-## Table of Contents
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Firebase Configuration](#firebase-configuration)
-- [Features](#features)
-- [Usage](#usage)
+Application e-commerce développée avec Flutter et Firebase.
+Permet aux utilisateurs de parcourir des produits et de gérer leurs achats.
 
----
+## Fonctionnalités
 
-## Requirements
+- Authentification utilisateur (inscription/connexion)
+- Affichage des produits
+- Gestion des achats
+- Stockage des données avec Firestore
 
-- Flutter SDK (v2.0 or later)
-- Firebase Account
-- Dart SDK
+## Technologies utilisées
+
+- Flutter
+- Firebase Authentication
+- Cloud Firestore
+- GetX pour la gestion d'état
 
 ## Installation
 
-1. **Clone the repository:**
-    ```sh
-    git clone https://github.com/your-repo/my-flutter-app.git
-    cd my-flutter-app
-    ```
+1. Cloner le projet
+2. Exécuter `flutter pub get`
+3. Configurer Firebase avec vos clés
+4. Lancer avec `flutter run`
 
-2. **Install dependencies:**
-    ```sh
-    flutter pub get
-    ```
+## Architecture
 
-3. **Set up your Firebase project:**
-    - Go to the [Firebase Console](https://console.firebase.google.com/).
-    - Create a new project.
-    - Enable Authentication (Email/Password).
-    - Create a Firestore database.
-    - Add your project configuration to `lib/firebase_options.dart`.
+L'application suit une architecture MVC :
 
-## Firebase Configuration
-
-Create or update the `lib/firebase_options.dart` file with your Firebase project configuration details by following the setup instructions for the [`firebase_core` plugin](https://firebase.flutter.dev/docs/overview).
-
-## Features
-
-- User Authentication (Login, Register, Logout)
-- Add Items
-- Edit Items
-- Delete Items
-- Data is persisted with Firestore
-
-## Usage
-
-1. **Run the application:**
-    ```sh
-    flutter run
-    ```
-
-    Your app should now be running on your emulator or connected device.
-
-2. **Register a new user or log in with an existing account.**
-3. **Add, edit, or delete items as per your requirement.**
+- Models : Gestion des données
+- Views : Interface utilisateur
+- Controllers : Logique métier
