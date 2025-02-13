@@ -45,6 +45,33 @@ class MyFirestoreHelper{
 
   }
 
+  Future<void> resetPassword(String email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      print("Erreur de réinitialisation : $e");
+      throw e;
+    }
+  }
+
+  Future<void> updatePassword(String newPassword) async {
+    try {
+      await auth.currentUser?.updatePassword(newPassword);
+    } catch (e) {
+      print("Erreur de mise à jour : $e");
+      throw e;
+    }
+  }
+
+  Future<void> addToHistory(String productId) async {
+    final user = auth.currentUser;
+    if (user != null) {
+      await cloudUtilisateurs.doc(user.uid).update({
+        'PRODUITS': FieldValue.arrayUnion([productId])
+      });
+    }
+  }
+
 
 
 
